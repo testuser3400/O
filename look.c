@@ -4,7 +4,7 @@
 int main()
 {
     int request[50], n;
-    int head, blocks;
+    int blocks, head;
     int i, j, temp;
     int total = 0;
 
@@ -17,9 +17,7 @@ int main()
     printf("Enter disk request string:\n");
 
     for (i = 0; i < n; i++)
-    {
         scanf("%d", &request[i]);
-    }
 
     printf("Enter current head position: ");
     scanf("%d", &head);
@@ -41,18 +39,10 @@ int main()
     printf("\nOrder of requests served:\n");
     printf("%d", head);
 
-    /*
-       C-SCAN, Direction = RIGHT
-       Serve requests greater than head.
-       Go to the last block.
-       Jump to 0.
-       Then serve remaining requests.
-    */
-
-    /* Move RIGHT */
-    for (i = 0; i < n; i++)
+    /* LEFT direction */
+    for (i = n - 1; i >= 0; i--)
     {
-        if (request[i] >= head)
+        if (request[i] < head)
         {
             total = total + abs(head - request[i]);
             head = request[i];
@@ -61,22 +51,10 @@ int main()
         }
     }
 
-    /* Move to last disk block */
-    total = total + abs(head - (blocks - 1));
-    head = blocks - 1;
-
-    printf(" -> %d", head);
-
-    /* Jump from last block to 0 */
-    total = total + (blocks - 1);
-    head = 0;
-
-    printf(" -> %d", head);
-
-    /* Serve remaining requests */
+    /* RIGHT direction */
     for (i = 0; i < n; i++)
     {
-        if (request[i] < head)
+        if (request[i] > head)
         {
             total = total + abs(head - request[i]);
             head = request[i];
