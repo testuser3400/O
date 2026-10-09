@@ -1,15 +1,15 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
 int main()
 {
-    int n, i;
+    int blocks, n, i;
     int request[50];
-    int head;
-    int total = 0;
+    int head, total = 0;
 
     printf("Enter total number of disk blocks: ");
-    scanf("%d", &n);
+    scanf("%d", &blocks);
 
     printf("Enter number of disk requests: ");
     scanf("%d", &n);
@@ -35,6 +35,7 @@ int main()
     }
 
     printf("\n\nTotal head movement = %d\n", total);
-
+    printf("Average seek Time := %d\n",total/n);
     return 0;
 }
+
